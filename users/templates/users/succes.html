@@ -10,9 +10,8 @@
 
     <form method="post">
 
-        {% csrf_token %}
-        {{ form|crispy }}
-        <button type="submit" class="btn btn-success">Login</button>
+        <p>GO TO EMAIL</p>
+        <a class="btn btn-success" href="{% url 'users:login' %}">Ok</a>
 
     </form>
 
