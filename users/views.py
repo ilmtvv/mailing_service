@@ -1,12 +1,12 @@
 from django.conf import settings
-from django.shortcuts import render
+
 from django.contrib.auth.views import LoginView, LogoutView
 from django.views.generic import CreateView, UpdateView
 from users.models import User
 from users.forms import UserForm, ProfileForm
-from django.urls import reverse_lazy, reverse
+from django.urls import reverse_lazy
 from utils.email_post import email_post
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import render, get_object_or_404
 class UserLoginView(LoginView):
     template_name = 'users/login.html'
 
