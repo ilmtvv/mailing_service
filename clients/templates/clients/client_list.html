@@ -14,8 +14,34 @@
 </div>
 </div>
 
+<div class="container-fluid text-center">
+<p><h5>CLIENTS</h5></p>
+</div>
+
+<table class="table">
+
+<thead>
+    <tr>
+      <th scope="col">NAME</th>
+      <th scope="col">EMAIL</th>
+      <th scope="col">COMMENT</th>
+      <th scope="col">UPDATE</th>
+      <th scope="col">DELETE</th>
+    </tr>
+  </thead>
+
+  <tbody>
 {% for object in object_list %}
-{{object}}
+    <tr>
+      <td>{{ object.name }}</td>
+      <td>{{ object.email }}</td>
+      <td>{{ object.comment }}</td>
+      <td><a class="p-1 btn btn-success" href="{% url 'clients:client_update' object.pk %}">Update</a></td>
+      <td><a class="p-1 btn btn-outline-danger" href="{% url 'clients:delete_client' object.pk %}">Delete</a></td>
+    </tr>
 {% endfor %}
+  </tbody>
+
+</table>
 
 {% endblock %}
