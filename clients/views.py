@@ -1,6 +1,5 @@
-from django.http import HttpResponseRedirect
-from django.shortcuts import render
-from django.urls import reverse_lazy, reverse
+from django.shortcuts import redirect
+from django.urls import reverse_lazy
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 from clients.models import Client
 
@@ -36,3 +35,8 @@ class ClientUpdateView(UpdateView):
 class DeleteClientView(DeleteView):
     model = Client
     success_url = reverse_lazy('clients:clients_list')
+
+
+def delete_client(request, pk):
+    Client.delete(Client.objects.get(pk=pk))
+    return redirect(reverse_lazy('clients:clients_list'))
