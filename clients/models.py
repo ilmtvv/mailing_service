@@ -9,8 +9,9 @@ class Client(models.Model):
     name = models.CharField(max_length=50)
     comment = models.CharField(max_length=50)
     is_active = models.BooleanField(default=True)
-    users = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
+    users = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True,)
 
     class Meta:
-        unique_together = [['email', 'name',]]
-
+        unique_together = [['email', 'name', 'users']]
+        verbose_name = 'client'
+        verbose_name_plural = 'clients'
