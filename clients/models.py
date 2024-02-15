@@ -14,4 +14,4 @@ class Client(models.Model):
     class Meta:
         unique_together = [['email', 'name', 'users',]]
         verbose_name = 'Client'
-        verbose_name_plural = 'Client'
+        verbose_name_plural = 'Clients'
