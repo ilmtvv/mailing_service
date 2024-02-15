@@ -1,3 +1,4 @@
+from django.contrib.sites import requests
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
@@ -6,6 +7,9 @@ from clients.models import Client
 
 class ClientsListView(ListView):
     model = Client
+
+    def get_queryset(self):
+        return super().get_queryset().filter(users=self.request.user)
 
 
 class ClientCreateView(CreateView):
