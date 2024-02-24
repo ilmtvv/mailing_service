@@ -12,6 +12,6 @@ class Client(models.Model):
     users = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
 
     class Meta:
-        unique_together = [['email', 'name', ]]
+        unique_together = [['email', 'name', 'users']]
         verbose_name = 'Client'
         verbose_name_plural = 'Clients'
