@@ -1,0 +1,42 @@
+{% extends 'users/base.html' %}
+
+{% block content %}
+
+{% load crispy_forms_tags %}
+
+
+
+<div class="container-fluid text-center">
+<p><h5>LOGS</h5></p>
+</div>
+
+<table class="table">
+
+<thead>
+    <tr>
+
+      <th scope="col">MAILING</th>
+      <th scope="col">TIME</th>
+      <th scope="col">RESPONCE MAILING</th>
+
+      <th scope="col">RESPONCE SERVER</th>
+
+    </tr>
+  </thead>
+
+  <tbody>
+{% for object in object_list %}
+    <tr>
+
+      <td>{{ object.mailing }}</td>
+      <td>{{ object.time }}</td>
+      <td>{{ object.responce_mailing }}</td>
+      <td>{{ object.responce_server }}</td>
+
+    </tr>
+{% endfor %}
+  </tbody>
+
+</table>
+
+{% endblock %}

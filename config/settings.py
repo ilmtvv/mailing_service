@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'clients',
     'output_messages',
     'mailings',
+    'logs',
 ]
 
 MIDDLEWARE = [

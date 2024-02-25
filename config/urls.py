@@ -26,4 +26,5 @@ urlpatterns = [
     path('clients/', include('clients.urls', namespace='clients')),
     path('messages/', include('output_messages.urls', namespace='messages')),
     path('mailings/', include('mailings.urls', namespace='mailings')),
+    path('logs/', include('logs.urls', namespace='logs')),
 ]
