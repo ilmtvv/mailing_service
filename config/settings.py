@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'users',
     'home',
     'clients',
+    'output_messages',
 ]
 
 MIDDLEWARE = [

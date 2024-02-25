@@ -18,6 +18,7 @@
         <a class="navbar-brand" href="{% url 'home:home_view' %}"><h5 class="my-0 mr-md-auto font-weight-normal">SPAM</h5></a>
             <nav class="ms-5">
                 {% if user.is_authenticated %}
+                <a class="p-2 btn btn-success" href="{% url 'messages:messages_list' %}">Massages</a>
                 <a class="p-2 btn btn-success" href="{% url 'clients:clients_list' %}">Clients</a>
                 <a class="p-2 btn btn-success" href="{% url 'users:profile' %}">Profile</a>
                 <a class="p-2 btn btn-outline-danger" href="{% url 'users:logout' %}">Exit</a>

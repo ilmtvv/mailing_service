@@ -1,5 +1,4 @@
 from django.db import models
-from django.http import request
 
 from users.models import User
 
