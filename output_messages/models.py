@@ -9,6 +9,9 @@ class OutputMessage(models.Model):
     body = models.TextField(null=True, blank=True)
     users = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
 
+    def __str__(self):
+        return f'{ self.title }'
+
     class Meta:
         unique_together = [['title', 'users']]
         verbose_name = 'OutputMessage'

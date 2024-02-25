@@ -10,6 +10,9 @@ class Client(models.Model):
     is_active = models.BooleanField(default=True)
     users = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
 
+    def __str__(self):
+        return f'{ self.email } { self.name }'
+
     class Meta:
         unique_together = [['email', 'name', 'users']]
         verbose_name = 'Client'
