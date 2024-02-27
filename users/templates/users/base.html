@@ -22,6 +22,9 @@
                 <a class="p-2 btn btn-success" href="{% url 'messages:messages_list' %}">Massages</a>
                 <a class="p-2 btn btn-success" href="{% url 'clients:clients_list' %}">Clients</a>
                 <a class="p-2 btn btn-success" href="{% url 'users:profile' %}">Profile</a>
+                {% if perms.mailings.manager %}
+                <a class="p-2 btn btn-outline-danger" href="{% url 'users:all' %}">Users</a>
+                {% endif %}
                 <a class="p-2 btn btn-outline-danger" href="{% url 'logs:log_list' %}">Logs</a>
                 <a class="p-2 btn btn-outline-danger" href="{% url 'users:logout' %}">Exit</a>
                 {% else %}

@@ -32,3 +32,10 @@ class Mailing(models.Model):
 
         verbose_name = 'Mailing'
         verbose_name_plural = 'Mailings'
+
+        permissions = [
+            (
+                'manager',
+                'Can view all mailing'
+            )
+        ]

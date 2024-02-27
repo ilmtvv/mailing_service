@@ -1,3 +1,4 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
@@ -5,14 +6,14 @@ from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 from output_messages.models import OutputMessage
 
 
-class MessagesListView(ListView):
+class MessagesListView(LoginRequiredMixin, ListView):
     model = OutputMessage
 
     def get_queryset(self):
         return super().get_queryset().filter(users=self.request.user)
 
 
-class MessageCreateView(CreateView):
+class MessageCreateView(LoginRequiredMixin, CreateView):
     model = OutputMessage
     fields = ('title', 'body',)
     success_url = reverse_lazy('messages:messages_list')
@@ -27,7 +28,7 @@ class MessageCreateView(CreateView):
         return super().form_valid(form)
 
 
-class MessageUpdateView(UpdateView):
+class MessageUpdateView(LoginRequiredMixin, UpdateView):
     model = OutputMessage
     success_url = reverse_lazy('messages:messages_list')
     fields = ('title', 'body',)
@@ -36,6 +37,6 @@ class MessageUpdateView(UpdateView):
     }
 
 
-class DeleteMessageView(DeleteView):
+class DeleteMessageView(LoginRequiredMixin, DeleteView):
     model = OutputMessage
     success_url = reverse_lazy('messages:messages_list')

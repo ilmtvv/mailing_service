@@ -43,17 +43,34 @@
         <td><span class="badge rounded-pill text-bg-warning">CREATED</span></td>
         {% elif object.mailing_status == 1 %}
         <td><span class="badge rounded-pill text-bg-secondary">ACTIVATING</span></td>
+        {% elif object.mailing_status == 2 %}
+        <td><span class="badge rounded-pill text-bg-danger">STOP</span></td>
         {% else %}
         <td><span class="badge rounded-pill text-bg-success">SUCCESS</span></td>
         {% endif %}
 
       <td>
-          {% if object.mailing_status != 1 %}
+          {% if object.mailing_status != 1 and perms.mailings.manager == False %}
           <a class="p-1 btn btn-success" href="{% url 'mailings:mailing_update' object.pk %}">Update</a>
+          {% else %}
+          <a class="p-1 btn btn-success disabled" aria-disabled="true">Update</a>
           {% endif %}
       </td>
 
-      <td><a class="p-1 btn btn-outline-danger" href="{% url 'mailings:delete_mailing' object.pk %}">Delete</a></td>
+      <td>
+          {% if object.mailing_status != 1 and perms.mailings.manager == False %}
+          <a class="p-1 btn btn-outline-danger" href="{% url 'mailings:delete_mailing' object.pk %}">Delete</a>
+          {% else %}
+          <a class="p-1 btn btn-outline-danger disabled" aria-disabled="true">Delete</a>
+          {% endif %}
+          {% if perms.mailings.manager %}
+          {% if object.mailing_status != 2 %}
+          <a class="p-1 btn btn-outline-danger" href="{% url 'mailings:stop_mailing' object.pk %}">Stop</a>
+          {% else %}
+          <a class="p-1 btn btn-success" href="{% url 'mailings:stop_mailing' object.pk %}">Start</a>
+          {% endif %}
+          {% endif %}
+      </td>
     </tr>
 {% endfor %}
   </tbody>
