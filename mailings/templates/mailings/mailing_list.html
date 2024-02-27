@@ -48,9 +48,8 @@
         {% endif %}
 
       <td>
+          {% if object.mailing_status != 1 %}
           <a class="p-1 btn btn-success" href="{% url 'mailings:mailing_update' object.pk %}">Update</a>
-          {% if object.mailing_status == -1 %}
-          <a class="p-1 btn btn-success" href="#">restart</a>
           {% endif %}
       </td>
 

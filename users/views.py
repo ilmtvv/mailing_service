@@ -1,11 +1,12 @@
 from django.conf import settings
 
 from django.contrib.auth.views import LoginView, LogoutView
+from django.core.mail import send_mail
 from django.views.generic import CreateView, UpdateView
 from users.models import User
 from users.forms import UserForm, ProfileForm
 from django.urls import reverse_lazy
-from utils.email_post import email_post
+
 from django.shortcuts import render, get_object_or_404
 class UserLoginView(LoginView):
     template_name = 'users/login.html'
@@ -32,8 +33,8 @@ class RegisterView(CreateView):
         subject='GO TO SITE'
         message=f'http://127.0.0.1:8000/users/register/{new_user.uuid}/'
         from_email=settings.EMAIL_HOST_USER
-        recipient_list=[new_user.username]
-        email_post(subject, message, from_email, recipient_list)
+        recipient_list=[new_user.email]
+        send_mail(subject, message, from_email, recipient_list)
         return super().form_valid(form)
 def confirm(request, uuid):
     user = get_object_or_404(User, uuid=uuid)
