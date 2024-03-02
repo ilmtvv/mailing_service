@@ -11,7 +11,7 @@ class Client(models.Model):
     users = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
 
     def __str__(self):
-        return f'{ self.email } { self.name }'
+        return f'{ self.email }'
 
     class Meta:
         unique_together = [['email', 'name', 'users']]

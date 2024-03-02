@@ -4,6 +4,6 @@ cron = CronTab(user=True)
 
 for job in cron:
     print(job)
-
-#cron.remove_all()
-#cron.write()
+#
+# cron.remove_all()
+# cron.write()
