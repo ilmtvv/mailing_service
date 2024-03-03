@@ -31,3 +31,9 @@
 python manage.py pre_mailing --pk_mailing=int:pk
 
 <h1 align="center">SCREENSHOTS</h1>
+<p align="center"><img width="1020px" src="screenshots/Screenshot 2024-03-04 at 01-11-43 spam.png"/></p>
+<p align="center"><img width="1020px" src="screenshots/Screenshot 2024-03-04 at 01-12-58 spam.png"/></p>
+<p align="center"><img width="1020px" src="screenshots/Screenshot 2024-03-04 at 01-28-29 spam.png"/></p>
+<p align="center"><img width="1020px" src="screenshots/Screenshot 2024-03-04 at 01-28-36 spam.png"/></p>
+<p align="center"><img width="1020px" src="screenshots/Screenshot 2024-03-04 at 01-28-49 spam.png"/></p>
+<p align="center"><img width="1020px" src="screenshots/Screenshot 2024-03-04 at 01-29-39 spam.png"/></p>
