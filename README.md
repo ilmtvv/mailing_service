@@ -17,6 +17,11 @@
 
 [EXAMPLE](https://github.com/ilmtvv/mailing_service/blob/develop/sample_env)
 
+<h5 align="center">CREATE MANAGERS</h5>
+
+- [GROUPS]
+- COMMAND [create_managers]
+
 <h5 align="center">COMMAND FOR MAILING IN DJANGO SHELL</h5>
 python manage.py pre_mailing --pk_mailing=int:pk
 
