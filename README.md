@@ -25,7 +25,7 @@
 - redis = "^5.0.2"
 
 <h5 align="center">CREATE .env</h5>
-[EXAMPLE](https://github.com/ilmtvv/mailing_service/blob/develop/sample_env)
+[EXAMPLE](https://github.com/ilmtvv/mailing_service/blob/develop/sample_env#EXAMPLE)
 
 <h5 align="center">COMMAND FOR MAILING IN DJANGO SHELL</h5>
 python manage.py pre_mailing --pk_mailing=int:pk
