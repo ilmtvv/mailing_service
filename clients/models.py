@@ -1,5 +1,4 @@
 from django.db import models
-from django.http import request
 
 from users.models import User
 
@@ -9,9 +8,12 @@ class Client(models.Model):
     name = models.CharField(max_length=50)
     comment = models.CharField(max_length=50)
     is_active = models.BooleanField(default=True)
-    users = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
+    users = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
+
+    def __str__(self):
+        return f'{ self.email }'
 
     class Meta:
-        unique_together = [['email', 'name', 'users',]]
+        unique_together = [['email', 'name', 'users']]
         verbose_name = 'Client'
-        verbose_name_plural = 'Client'
+        verbose_name_plural = 'Clients'

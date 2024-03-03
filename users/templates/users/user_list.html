@@ -1,0 +1,39 @@
+{% extends 'users/base.html' %}
+
+{% block content %}
+
+{% load crispy_forms_tags %}
+
+<div class="container-fluid text-center">
+<p><h5>USERS</h5></p>
+</div>
+
+<table class="table">
+
+<thead>
+    <tr>
+
+      <th scope="col">EMAIL</th>
+
+
+      <th scope="col">STATUS</th>
+    </tr>
+  </thead>
+
+  <tbody>
+{% for object in object_list %}
+    <tr>
+
+      <td>{{ object.email }}</td>
+        {% if object.is_active %}
+        <td><a class="p-1 btn btn-outline-danger" href="{% url 'users:checkout-status' object.pk %}">DEACTIVATE</a></td>
+        {% else %}
+        <td><a class="p-1 btn btn-success" href="{% url 'users:checkout-status' object.pk %}">ACTIVATE</a></td>
+        {% endif %}
+    </tr>
+{% endfor %}
+  </tbody>
+
+</table>
+
+{% endblock %}

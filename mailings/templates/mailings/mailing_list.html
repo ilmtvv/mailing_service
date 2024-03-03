@@ -1,0 +1,84 @@
+{% extends 'users/base.html' %}
+
+{% block content %}
+
+{% load crispy_forms_tags %}
+
+<div class="container-fluid text-center">
+<div class="row justify-content-center">
+<div class="col-2">
+
+    <a class="p-2 btn btn-success" href="{% url 'mailings:mailing_create' %}">Add mailing</a>
+
+</div>
+</div>
+</div>
+
+<div class="container-fluid text-center">
+<p><h5>MAILINGS</h5></p>
+</div>
+
+<table class="table">
+
+<thead>
+    <tr>
+      <th scope="col">MESSAGE</th>
+      <th scope="col">TIME</th>
+      <th scope="col">PERIODICITY</th>
+      <th scope="col">STATUS</th>
+
+      <th scope="col">UPDATE</th>
+      <th scope="col">DELETE</th>
+    </tr>
+  </thead>
+
+  <tbody>
+{% for object in object_list %}
+    <tr>
+      <td>{{ object.message }}</td>
+      <td>{{ object.mailing_time }}</td>
+      <td>{{ object.periodicity }}</td>
+
+        {% if object.mailing_status == 0 %}
+        <td><span class="badge rounded-pill text-bg-warning">CREATED</span></td>
+        {% elif object.mailing_status == 1 %}
+        <td><span class="badge rounded-pill text-bg-secondary">ACTIVATING</span></td>
+        {% elif object.mailing_status == 2 %}
+        <td><span class="badge rounded-pill text-bg-danger">STOP</span></td>
+        {% else %}
+        <td><span class="badge rounded-pill text-bg-success">SUCCESS</span></td>
+        {% endif %}
+
+      <td>
+          {% if object.mailing_status != 1 and perms.mailings.manager == False %}
+          <a class="p-1 btn btn-success" href="{% url 'mailings:mailing_update' object.pk %}">Update</a>
+          {% elif perms.mailings.manager == True and object.users == user %}
+          <a class="p-1 btn btn-success" href="{% url 'mailings:mailing_update' object.pk %}">Update</a>
+          {% else %}
+          <a class="p-1 btn btn-success disabled" aria-disabled="true">Update</a>
+          {% endif %}
+      </td>
+
+      <td>
+          {% if object.mailing_status != 1 and perms.mailings.manager == False %}
+          <a class="p-1 btn btn-outline-danger" href="{% url 'mailings:delete_mailing' object.pk %}">Delete</a>
+          {% elif perms.mailings.manager == True and object.users == user %}
+          <a class="p-1 btn btn-outline-danger" href="{% url 'mailings:delete_mailing' object.pk %}">Delete</a>
+          {% else %}
+          <a class="p-1 btn btn-outline-danger disabled" aria-disabled="true">Delete</a>
+          {% endif %}
+          {% if perms.mailings.manager %}
+          {% if object.mailing_status != 2 %}
+          <a class="p-1 btn btn-outline-danger" href="{% url 'mailings:stop_mailing' object.pk %}">Stop</a>
+          {% else %}
+          <a class="p-1 btn btn-success" href="{% url 'mailings:stop_mailing' object.pk %}">Start</a>
+          {% endif %}
+          {% endif %}
+      </td>
+    </tr>
+{% endfor %}
+  </tbody>
+
+</table>
+
+{% endblock %}

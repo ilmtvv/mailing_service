@@ -13,6 +13,9 @@ crispy-bootstrap5 = "^2023.10"
 django-crispy-forms = "^2.1"
 python-dotenv = "^1.0.1"
 ipython = "^8.21.0"
+python-crontab = "^3.0.0"
+pillow = "^10.2.0"
+redis = "^5.0.2"
 
 [tool.poetry.dev-dependencies]
 
