@@ -52,6 +52,8 @@
       <td>
           {% if object.mailing_status != 1 and perms.mailings.manager == False %}
           <a class="p-1 btn btn-success" href="{% url 'mailings:mailing_update' object.pk %}">Update</a>
+          {% elif perms.mailings.manager == True and object.users == user %}
+          <a class="p-1 btn btn-success" href="{% url 'mailings:mailing_update' object.pk %}">Update</a>
           {% else %}
           <a class="p-1 btn btn-success disabled" aria-disabled="true">Update</a>
           {% endif %}
@@ -59,6 +61,8 @@
 
       <td>
           {% if object.mailing_status != 1 and perms.mailings.manager == False %}
+          <a class="p-1 btn btn-outline-danger" href="{% url 'mailings:delete_mailing' object.pk %}">Delete</a>
+          {% elif perms.mailings.manager == True and object.users == user %}
           <a class="p-1 btn btn-outline-danger" href="{% url 'mailings:delete_mailing' object.pk %}">Delete</a>
           {% else %}
           <a class="p-1 btn btn-outline-danger disabled" aria-disabled="true">Delete</a>

@@ -5,8 +5,8 @@ from users.models import User
 
 
 class Log(models.Model):
-    user = models.ForeignKey(User, on_delete=models.DO_NOTHING) # users
-    mailing = models.ForeignKey(Mailing, on_delete=models.DO_NOTHING)   # mailing.title
+    user = models.ForeignKey(User, on_delete=models.DO_NOTHING, default=1) # users
+    mailing = models.CharField(max_length=25, default='test')   # mailing.title
     time = models.DateTimeField(auto_now_add=True)
     responce_mailing = models.CharField(max_length=25)  # ?
     responce_server = models.CharField(max_length=25)   # ?

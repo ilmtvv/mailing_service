@@ -3,7 +3,10 @@ from email.message import EmailMessage
 from config import settings
 import smtplib
 
-def email_post(subject, message, recipient_list):   # проблемы с безопасностью
+from logs.models import Log
+
+
+def email_post(subject, message, recipient_list, mailing_object):   # проблемы с безопасностью
     from_email = settings.EMAIL_HOST_USER
     password_from_email = settings.EMAIL_HOST_PASSWORD
 
@@ -16,9 +19,11 @@ def email_post(subject, message, recipient_list):   # проблемы с без
 
     try:
         server.sendmail(from_email, recipient_list, msg.as_string())
-        return True, 'sent'
+        log = Log.objects.create(mailing=subject, user=mailing_object.users, responce_mailing='OK', responce_server='OK')
+        return log.save()
     except Exception as e:
-        return False, str(e)
+        log = Log.objects.create(mailing=subject, user=mailing_object.users, responce_mailing='NO', responce_server='OK')
+        return log.save()
     finally:
         server.quit()
 

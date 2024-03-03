@@ -8,4 +8,7 @@ class LogListView(LoginRequiredMixin, ListView):
     model = Log
 
     def get_queryset(self):
-        return super().get_queryset().filter(user=self.request.user)
+        queryset = super().get_queryset().filter(user=self.request.user)
+        if self.request.user.is_superuser:
+            queryset = super().get_queryset()
+        return queryset

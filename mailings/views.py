@@ -10,9 +10,11 @@ from django.shortcuts import render, redirect
 from django.urls import reverse_lazy, reverse
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 
+from clients.models import Client
 from config.settings import BASE_DIR
 from mailings.models import Mailing
-from mailings.permissions import NotPermissionRequiredMixin
+
+from output_messages.models import OutputMessage
 from utils.create_cron_jobs import create_cron_jobs
 
 
@@ -34,7 +36,11 @@ class MailingCreateView(LoginRequiredMixin, CreateView):
         'title': 'Add',
     }
 
-
+    def get_form(self, form_class=None):
+        form = super().get_form(form_class)
+        form.fields['message'].queryset = OutputMessage.objects.filter(users=self.request.user)
+        form.fields['clients'].queryset = Client.objects.filter(users=self.request.user)
+        return form
 
     def form_valid(self, form):
         self.object = form.save()
@@ -46,15 +52,25 @@ class MailingCreateView(LoginRequiredMixin, CreateView):
         return super().form_valid(form)
 
 
-class MailingUpdateView(LoginRequiredMixin, NotPermissionRequiredMixin, UpdateView):
+class MailingUpdateView(LoginRequiredMixin, UpdateView):    # пока не знаю как открыть доступ для рассылок менеджера
     model = Mailing
     success_url = reverse_lazy('mailings:mailing_list')
     fields = ('message', 'clients', )
     extra_context = {
         'title': 'Update',
     }
-    permission_required = 'mailings.manager'
 
+    def get_queryset(self):
+        if self.request.user.has_perm('mailings.manager'):
+            return super().get_queryset()
+        else:
+            return super().get_queryset().filter(users=self.request.user)
+
+    def get_form(self, form_class=None):
+        form = super().get_form(form_class)
+        form.fields['message'].queryset = OutputMessage.objects.filter(users=self.request.user)
+        form.fields['clients'].queryset = Client.objects.filter(users=self.request.user)
+        return form
 
 
 class DeleteMailingView(LoginRequiredMixin, DeleteView):
