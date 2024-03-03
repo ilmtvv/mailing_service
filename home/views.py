@@ -1,17 +1,26 @@
+from django.core.cache import cache
 from django.shortcuts import render
 
 from blog.models import BlogUnit
 from clients.models import Client
+from config.settings import CACHE_ENABLED
 from mailings.models import Mailing
 
 
 def home_view(request): # как будто бы дофига запросов в базу данных,
     # но онож кешироваться будет, вот если бы как то разом за один заход вытянуть все
     # как то это можно было сделать ??
-    queryset = BlogUnit.objects.all().order_by('?')
-    blog_units_list = queryset[:3]
+    if CACHE_ENABLED:
+        key = 'blog_units_list'
+        blog_units_list = cache.get(key)
+        if blog_units_list is None:
+            blog_units_list = BlogUnit.objects.all().order_by('?')[:3]
+            cache.set(key, blog_units_list)
+    else:
+        blog_units_list = BlogUnit.objects.all().order_by('?')[:3]
 
     if request.user.is_authenticated:
+
         queryset = Mailing.objects.all().filter(users=request.user)
         mailings_all = queryset.count()
 
