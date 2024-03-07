@@ -161,6 +161,7 @@ EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
 EMAIL_USE_SSL = True
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'    # для отправки писем в консоль
+#EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'    # для отправки писем в пустоту
 
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
 

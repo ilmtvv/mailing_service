@@ -32,7 +32,7 @@ def mailing(mailing_object):
           # logs?
     # from_email = settings.EMAIL_HOST_USER
     # send_mail(subject, message, from_email, clients_list)
-    #
+    #SMTPAuthenticationError
     # log = Log.objects.create(mailing=subject, user=mailing_object.users, responce_mailing='OK', responce_server='OK')
     # log.save()
     clients_list = []
