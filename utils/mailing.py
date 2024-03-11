@@ -27,12 +27,18 @@ def mailing(mailing_object):
     mailing_object.save()
 
 
-    email_post(subject, message, clients_list, mailing_object.users)
+    # email_post(subject, message, clients_list, mailing_object.users)
 
           # logs?
-    # from_email = settings.EMAIL_HOST_USER
-    # send_mail(subject, message, from_email, clients_list)
-    #
+    from_email = settings.EMAIL_HOST_USER
+    try:
+        send_mail(subject, message, from_email, clients_list)
+        log = Log.objects.create(mailing=subject, user=mailing_object.users, responce_mailing='OK', responce_server='OK')
+        log.save()
+    except:
+        log = Log.objects.create(mailing=subject, user=mailing_object.users, responce_mailing='NO', responce_server='NO')
+        log.save()
+
     # log = Log.objects.create(mailing=subject, user=mailing_object.users, responce_mailing='OK', responce_server='OK')
     # log.save()
     clients_list = []

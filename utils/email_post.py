@@ -22,7 +22,7 @@ def email_post(subject, message, recipient_list, mailing_object):   # пробл
         log = Log.objects.create(mailing=subject, user=mailing_object.users, responce_mailing='OK', responce_server='OK')
         return log.save()
     except Exception as e:
-        log = Log.objects.create(mailing=subject, user=mailing_object.users, responce_mailing='NO', responce_server='OK')
+        log = Log.objects.create(mailing=subject, user=mailing_object.users, responce_mailing='NO', responce_server=e)
         return log.save()
     finally:
         server.quit()
