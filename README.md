@@ -1,4 +1,9 @@
 <h1 align="center">SPAM</h1>
+Context
+
+     To retain current customers, auxiliary, or “warm-up” mailings are often used to inform and attract customers.
+
+     We present to your attention a service for managing mailings, administering and obtaining statistics.
 <h5 align="center">PACKAGES</h5>
 
 - python = "^3.10"
